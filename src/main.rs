@@ -96,7 +96,8 @@ fn main() {
                     == //"Changes done successfully"
                 matching_string.get(0).unwrap().trim()
                 {
-                    let _append_row = sw.append_row(row![row[0].to_string()]);
+                    let _append_row =
+                        sw.append_row(row![row[0].to_string().trim_start_matches('0')]);
                 }
             }
             Ok(())
