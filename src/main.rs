@@ -5,7 +5,6 @@ use excel::*;
 use simple_excel_writer as excel;
 
 fn main() {
-    // println!("{:?}", std::env::args());
     let matches = Command::new("excel_filter")
         .version("0.1.0")
         .author("None")
@@ -93,8 +92,7 @@ fn main() {
             let sw = sheet_writer;
             for row in r.rows() {
                 if &row[matching_column.get(0).unwrap().parse::<usize>().unwrap()]
-                    == //"Changes done successfully"
-                matching_string.get(0).unwrap().trim()
+                    == matching_string.get(0).unwrap().trim()
                 {
                     let _append_row =
                         sw.append_row(row![row[0].to_string().trim_start_matches('0')]);
