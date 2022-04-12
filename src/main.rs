@@ -8,7 +8,7 @@ fn main() {
     // println!("{:?}", std::env::args());
     let matches = Command::new("excel_filter")
         .version("0.1.0")
-        .author("Node JX <fgsoap@gmail.com>")
+        .author("None")
         .about("Excel File Filter")
         .arg(
             Arg::new("source_path")
@@ -23,7 +23,7 @@ fn main() {
                 .short('k')
                 .value_name("Source Sheet Name")
                 .help("Input source sheet name.")
-                .required(false)
+                .required(true)
                 .min_values(1),
         )
         .arg(
@@ -39,7 +39,7 @@ fn main() {
                 .short('l')
                 .value_name("Target Sheet Name")
                 .help("Input target sheet name.")
-                .required(false)
+                .required(true)
                 .min_values(1),
         )
         .arg(
@@ -47,7 +47,7 @@ fn main() {
                 .short('c')
                 .value_name("Matching Column")
                 .help("Input matching column, starting from 0.")
-                .required(false)
+                .required(true)
                 .min_values(1),
         )
         .arg(
@@ -55,7 +55,7 @@ fn main() {
                 .short('m')
                 .value_name("Matching String")
                 .help("Input matching string.")
-                .required(false)
+                .required(true)
                 .min_values(1),
         )
         .get_matches();
@@ -91,14 +91,15 @@ fn main() {
     if let Some(Ok(r)) = excel.worksheet_range(source_sheet_name.get(0).unwrap()) {
         wb.write_sheet(&mut sheet, |sheet_writer| -> Result<(), std::io::Error> {
             let sw = sheet_writer;
-            Ok(for row in r.rows() {
+            for row in r.rows() {
                 if &row[matching_column.get(0).unwrap().parse::<usize>().unwrap()]
                     == //"Changes done successfully"
                 matching_string.get(0).unwrap().trim()
                 {
                     let _append_row = sw.append_row(row![row[0].to_string()]);
                 }
-            })
+            }
+            Ok(())
         })
         .expect("write excel error!");
     }
