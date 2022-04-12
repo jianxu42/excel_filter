@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 simple_excel_writer="0.1.4"
 calamine = "0.18.0"
+clap = "3.1.8"
+serde = { version = "1.0", features = ["derive"] }
