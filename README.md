@@ -1,7 +1,9 @@
 # excel_filter
 
 #### help
+```
 .\excel_filter.exe --help
+```
 ```
 excel_filter 0.1.0
 None
@@ -21,4 +23,6 @@ OPTIONS:
     -V, --version                    Print version information
 ```
 #### run
+```
 .\excel_filter.exe -s .\file.xlsx -k "Sheet1" -t .\newfile.xlsx -c 1 -m "Changes done successfully" -l "filtered"
+```
