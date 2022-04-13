@@ -101,6 +101,7 @@ fn main() {
             Ok(())
         })
         .expect("write excel error!");
+        wb.close().expect("close excel error!");
         println!("write excel success!");
     }
 }
