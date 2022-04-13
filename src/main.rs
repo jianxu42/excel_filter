@@ -50,6 +50,14 @@ fn main() {
                 .min_values(1),
         )
         .arg(
+            Arg::new("copy_column")
+                .short('p')
+                .value_name("Copy Column")
+                .help("Input copy column, starting from 0.")
+                .required(true)
+                .min_values(1),
+        )
+        .arg(
             Arg::new("matching_string")
                 .short('m')
                 .value_name("Matching String")
@@ -78,6 +86,10 @@ fn main() {
         .values_of("matching_column")
         .unwrap()
         .collect::<Vec<&str>>();
+    let copy_column = matches
+        .values_of("copy_column")
+        .unwrap()
+        .collect::<Vec<&str>>();
     let matching_string = matches
         .values_of("matching_string")
         .unwrap()
@@ -94,8 +106,10 @@ fn main() {
                 if &row[matching_column.get(0).unwrap().parse::<usize>().unwrap()]
                     == matching_string.get(0).unwrap().trim()
                 {
-                    let _append_row =
-                        sw.append_row(row![row[1].to_string().trim_start_matches('0')]);
+                    let _append_row = sw.append_row(row![row
+                        [copy_column.get(0).unwrap().parse::<usize>().unwrap()]
+                    .to_string()
+                    .trim_start_matches('0')]);
                 }
             }
             Ok(())
