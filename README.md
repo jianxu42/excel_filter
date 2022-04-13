@@ -10,7 +10,7 @@ None
 Excel File Filter
 
 USAGE:
-    excel_filter.exe -s <Source Path>... -k <Source Sheet Name>... -t <Target Path>... -l <Target Sheet Name>... -c <Matching Column>... -m <Matching String>...
+    excel_filter.exe -s <Source Path>... -k <Source Sheet Name>... -t <Target Path>... -l <Target Sheet Name>... -c <Matching Column>... -p <Copy Column>... -m <Matching String>...
 
 OPTIONS:
     -c <Matching Column>...          Input matching column, starting from 0.
@@ -18,6 +18,7 @@ OPTIONS:
     -k <Source Sheet Name>...        Input source sheet name.
     -l <Target Sheet Name>...        Input target sheet name.
     -m <Matching String>...          Input matching string.
+    -p <Copy Column>...              Input copy column, starting from 0.
     -s <Source Path>...              Input source path.
     -t <Target Path>...              Input target path.
     -V, --version                    Print version information
