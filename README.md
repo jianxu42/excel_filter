@@ -24,5 +24,5 @@ OPTIONS:
 ```
 #### run
 ```
-.\excel_filter.exe -s .\file.xlsx -k "Sheet1" -t .\newfile.xlsx -c 1 -m "Changes done successfully" -l "filtered"
+.\excel_filter.exe -s .\file.xlsx -k "Sheet1" -t .\newfile.xlsx -c 1 -p 0 -m "Changes done successfully" -l "filtered""
 ```
