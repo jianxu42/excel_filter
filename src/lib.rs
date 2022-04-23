@@ -11,7 +11,6 @@ type MyResult<T> = Result<T, Box<dyn Error>>;
 pub fn run(config: Config) -> MyResult<()> {
     let mut wb = Workbook::create(config.target_path.get(0).unwrap());
     let mut sheet = wb.create_sheet(config.target_sheet_name.get(0).unwrap());
-
     let mut excel: Xlsx<_> = open_workbook(config.source_path.get(0).unwrap()).unwrap();
     if let Some(Ok(r)) = excel.worksheet_range(config.source_sheet_name.get(0).unwrap()) {
         wb.write_sheet(&mut sheet, |sheet_writer| -> Result<(), std::io::Error> {
@@ -37,7 +36,6 @@ pub fn run(config: Config) -> MyResult<()> {
         wb.close().expect("close excel error!");
         println!("write excel success!");
     }
-
     Ok(())
 }
 
@@ -59,6 +57,7 @@ pub fn get_args() -> MyResult<Config> {
         .about("Excel File Filter")
         .arg(
             Arg::new("source_path")
+                .allow_invalid_utf8(true)
                 .short('s')
                 .value_name("Source Path")
                 .help("Input source path.")
@@ -67,6 +66,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("source_sheet_name")
+                .allow_invalid_utf8(true)
                 .short('k')
                 .value_name("Source Sheet Name")
                 .help("Input source sheet name.")
@@ -75,6 +75,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("target_path")
+                .allow_invalid_utf8(true)
                 .short('t')
                 .value_name("Target Path")
                 .help("Input target path.")
@@ -83,6 +84,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("target_sheet_name")
+                .allow_invalid_utf8(true)
                 .short('l')
                 .value_name("Target Sheet Name")
                 .help("Input target sheet name.")
@@ -91,6 +93,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("matching_column")
+                .allow_invalid_utf8(true)
                 .short('c')
                 .value_name("Matching Column")
                 .help("Input matching column, starting from 0.")
@@ -99,6 +102,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("copy_column")
+                .allow_invalid_utf8(true)
                 .short('p')
                 .value_name("Copy Column")
                 .help("Input copy column, starting from 0.")
@@ -107,6 +111,7 @@ pub fn get_args() -> MyResult<Config> {
         )
         .arg(
             Arg::new("matching_string")
+                .allow_invalid_utf8(true)
                 .short('m')
                 .value_name("Matching String")
                 .help("Input matching string.")
@@ -115,7 +120,6 @@ pub fn get_args() -> MyResult<Config> {
         )
         .get_matches();
     let source_path = matches.values_of_lossy("source_path").unwrap();
-
     let source_sheet_name = matches.values_of_lossy("source_sheet_name").unwrap();
     let target_path = matches.values_of_lossy("target_path").unwrap();
     let target_sheet_name = matches.values_of_lossy("target_sheet_name").unwrap();
