@@ -29,8 +29,8 @@ pub fn run(config: Config) -> MyResult<()> {
                     .to_string()
                     .trim_start_matches('0')]);
                     match append_row {
-                        Err(err) => eprintln!("{:?}", err),
                         Ok(_) => todo!(),
+                        Err(err) => eprintln!("{:?}", err),
                     };
                 }
             }
