@@ -24,10 +24,14 @@ pub fn run(config: Config) -> MyResult<()> {
                     .unwrap()]
                     == config.matching_string.get(0).unwrap().trim()
                 {
-                    let _append_row = sw.append_row(row![row
+                    let append_row = sw.append_row(row![row
                         [config.copy_column.get(0).unwrap().parse::<usize>().unwrap()]
                     .to_string()
                     .trim_start_matches('0')]);
+                    match append_row {
+                        Err(err) => eprintln!("{:?}", err),
+                        Ok(_) => todo!(),
+                    };
                 }
             }
             Ok(())
