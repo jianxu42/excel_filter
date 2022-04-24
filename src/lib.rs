@@ -29,7 +29,7 @@ pub fn run(config: Config) -> MyResult<()> {
                     .to_string()
                     .trim_start_matches('0')]);
                     match append_row {
-                        Ok(_) => todo!(),
+                        Ok(_) => (),
                         Err(err) => eprintln!("{:?}", err),
                     };
                 }
