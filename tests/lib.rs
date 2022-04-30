@@ -4,13 +4,13 @@ type TestResult = Result<(), Box<dyn std::error::Error>>;
 #[test]
 fn runs() -> TestResult {
     let mut cmd = Command::cargo_bin("excel_filter")?;
-    cmd.arg("-s ..\\..\\file.xlsx")
+    cmd.arg("-s ..\\..\\tests\\inputs\\file.xlsx")
         .arg("-k Sheet1")
-        .arg("-t ..\\..\\newfile.xlsx")
+        .arg("-t ..\\..\\tests\\newfile.xlsx")
         .arg("-c 1")
         .arg("-p 0")
-        .arg("-m \"Changes done successfully\"")
-        .arg("-l filtered");
-    cmd.assert().success().stdout("");
+        .arg("-m Done")
+        .arg("-l Sheet1");
+    cmd.assert().success();
     Ok(())
 }
